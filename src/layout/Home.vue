@@ -12,6 +12,8 @@
 
 <template>
   <Navigation />
-    <h1>Hello {{ $store.state.info }}</h1>
+    <main class="main">
+      <h1>Hello {{ $store.state.info }}</h1>
+    </main>
   <Footer />
 </template>
