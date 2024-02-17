@@ -1,14 +1,13 @@
-<script>
-</script>
+<script></script>
 
 <template>
   <footer class="footer">
-    <p>© 2024 Your Company Name. All rights reserved.</p>
+    <p>copyright &copy</p>
   </footer>
 </template>
 
 <style lang="scss">
-  .footer {
+ .footer {
     display: flex;
     justify-content: center;
     align-items: center;

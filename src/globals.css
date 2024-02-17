@@ -7,7 +7,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to top left, #3d3b3b, #383B40);
+  background-color: #383B40;
   font-family: 'Montserrat', sans-serif;
   color: #FFFFFF;
   overflow-x: hidden;

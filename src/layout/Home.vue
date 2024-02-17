@@ -1,11 +1,13 @@
 <script>
   import Navigation from '../components/Navigation.vue';
+  import Calendar from '../components/Calendar.vue';
   import Footer from '../components/Footer.vue';
 
   export default {
     components: {
       Navigation,
-      Footer
+      Footer,
+      Calendar,
     }
   }
 </script>
@@ -13,7 +15,7 @@
 <template>
   <Navigation />
     <main class="main">
-      <h1>Hello {{ $store.state.info }}</h1>
+      <Calendar />
     </main>
   <Footer />
 </template>
