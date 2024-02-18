@@ -1,8 +1,14 @@
 <script>
 import axios from 'axios';
-import { API_URL } from '../services/apiConfig.js';;
+import { API_URL } from '../services/apiConfig.js';
+import Loader from './Loader.vue';
+import Popup from './Popup.vue';
 
 export default {
+  components: {
+    Loader,
+    Popup,
+  },
   data() {
     return {
       calendarItems: this.$store.state.items,
@@ -18,31 +24,60 @@ export default {
         console.error('Ошибка при загрузке данных:', error);
       }
     }
-  }
+  },
+  mounted() {
+    this.getDataCalendar();
+  },
 }
 </script>
 
 <template>
-  <div class="calendar">
+  <div v-if="calendarItems.length > 0" class="calendar">
     <table class="tableFirst">
       <tbody>
-        <tr v-for="name in 7" :key="name" class="tableFirst__blockName">
-          <td class="tableFirst__blockName__name">name</td>
+        <tr
+          v-for="(item, index) in calendarItems"
+          v-show="index < 7"
+          :key="item.id"
+          class="tableFirst__blockName"
+        >
+          <td class="tableFirst__blockName__name">{{ item.roomDetails.name }}</td>
         </tr>
       </tbody>
     </table>
     <table class="tableSecond">
       <thead>
         <tr class="tableSecond__blockDate">
-          <th v-for="date in 7" :key="date" class="tableSecond__blockDate__date">23-04-55</th>
+          <th
+            v-for="(item, index) in calendarItems"
+            v-show="index < 7"
+            :key="item.id"
+            class="tableSecond__blockDate__date"
+          >
+            {{ item.start }}
+          </th>
+        </tr>
+        <tr class="tableSecond__blockDate">
+          <th
+            v-for="(item, index) in calendarItems"
+            v-show="index < 7"
+            :key="item.id"
+            class="tableSecond__blockDate__date"
+          >
+            {{ item.end }}
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="block in 7" :key="block" class="tableSecond__blockInfo">
-          <td v-for="day in 7" :key="day" class="tableSecond__blockInfo__currentDay"></td>
+          <td v-for="day in 7" :key="day" class="tableSecond__blockInfo__currentDay" />
         </tr>
       </tbody>
     </table>
+    <!-- <Popup /> -->
+  </div>
+  <div v-else>
+    <Loader />
   </div>
 </template>
 
@@ -57,7 +92,7 @@ export default {
 .tableFirst {
   border-collapse: collapse;
   width: 25%;
-  height: 500px;
+  height: 470px;
 
   &__blockName {
     border: 1px solid #f5f5f5;
@@ -67,6 +102,7 @@ export default {
       padding: 20px;
       font-size: 16px;
       line-height: 20px;
+      color: rgb(20, 198, 138);
     }
   }
 }
@@ -82,6 +118,7 @@ export default {
     &__date {
       border: 1px solid #f5f5f5;
       height: 30px;
+      color: rgb(16, 178, 124);
     }
   }
 
