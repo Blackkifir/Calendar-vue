@@ -1,4 +1,26 @@
-<script></script>
+<script>
+import axios from 'axios';
+import { API_URL } from '../services/apiConfig.js';;
+
+export default {
+  data() {
+    return {
+      calendarItems: this.$store.state.items,
+      calendarLoading: this.$store.state.loading,
+    }
+  },
+  methods: {
+    async getDataCalendar() {
+      try {
+        const response = await axios.get(API_URL);
+        this.calendarItems = response.data;
+      } catch (error) {
+        console.error('Ошибка при загрузке данных:', error);
+      }
+    }
+  }
+}
+</script>
 
 <template>
   <div class="calendar">
